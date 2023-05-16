@@ -1,11 +1,14 @@
-# JSON-RPC Client code
+# JSON-RPC Client Code
 
-Small JSON-RPC client-side demo.
+JSON-RPC client code deployed on Cloudflare Pages.
 
-## JSON-RPC Server code
+## What is JSON-RPC?
 
-This is deployed on Cloudflare Workers.
+_A light weight remote procedure call protocol_ – [jsonrpc.org](https://www.jsonrpc.org/).
 
+# JSON-RPC Server Code
+
+JSON-RPC server code deployed on Cloudflare Workers:
 ```
 async function handleRequest(request) {
   // Handle Preflight OPTIONS request separately
