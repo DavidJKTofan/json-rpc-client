@@ -22,9 +22,9 @@ async function makeJsonRpcRequest(method, params) {
     const rpcResponse = await response.json();
 
     if ("error" in rpcResponse) {
+        console.log("rpcResponse Error on POST request.");
         throw new Error(rpcResponse.error.message);
     }
-
     return rpcResponse.result;
 }
 
@@ -41,11 +41,10 @@ async function runDemo() {
         // Randomly select method1 or method2
         const method = Math.random() < 0.5 ? "method1" : "method2";
         const response = await makeJsonRpcRequest(method, params);
+        console.log("makeJsonRpcRequest", response)
 
         if (response.ok) {
-
             const result = await response.json();
-            console.log("makeJsonRpcRequest: ", result)
             // Access the result and cfData properties from the response
             const {
                 Newresult,
