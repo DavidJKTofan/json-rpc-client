@@ -38,7 +38,9 @@ async function runDemo() {
     const params = generateRandomParams();
     // Randomly select method1 or method2
     const method = Math.random() < 0.5 ? "method1" : "method2";
-    const result = await makeJsonRpcRequest(method, params);
+    const response = await makeJsonRpcRequest(method, params);
+    // Access the result and cfData properties from the response
+    const result = await response.json();
     console.log("makeJsonRpcRequest: ", result)
     // Access the result and cfData properties from the response
     const { result: rpcResult, cfData } = result;
