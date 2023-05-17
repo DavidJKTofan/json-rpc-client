@@ -23,7 +23,8 @@ async function makeJsonRpcRequest(method, params) {
     throw new Error(rpcResponse.error.message);
   }
 
-  return rpcResponse.result;
+  return rpcResponse;
+  //return rpcResponse.result;
 }
 
 // Client-side code (continued)
@@ -38,12 +39,10 @@ async function runDemo() {
     const params = generateRandomParams();
     // Randomly select method1 or method2
     const method = Math.random() < 0.5 ? "method1" : "method2";
-    const response = await makeJsonRpcRequest(method, params);
-    // Access the result and cfData properties from the response
-    const result = await response.json();
+    const result = await makeJsonRpcRequest(method, params);
     console.log("makeJsonRpcRequest: ", result)
     // Access the result and cfData properties from the response
-    const { result: rpcResult, cfData } = result;
+    const { result, cfData } = result;
     // Update the result in the HTML div
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML += `
