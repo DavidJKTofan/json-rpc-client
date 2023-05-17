@@ -15,7 +15,8 @@ async function makeJsonRpcRequest(method, params) {
         method: "POST",
         body: JSON.stringify(rpcRequest),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
         },
     });
 
@@ -25,7 +26,7 @@ async function makeJsonRpcRequest(method, params) {
         console.log("rpcResponse Error on POST request.");
         throw new Error(rpcResponse.error.message);
     }
-    return rpcResponse.result;
+    return rpcResponse;
 }
 
 // Client-side code (continued)
@@ -47,6 +48,7 @@ async function runDemo() {
 
         if (response.ok) {
             // Access the result and cfData properties from the response
+            //const result = await response.json();
             const { result: rpcResult, cfData } = response;
             // Update the result in the HTML div
             const resultDiv = document.getElementById("result");
