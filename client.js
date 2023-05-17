@@ -39,17 +39,21 @@ async function runDemo() {
     // Randomly select method1 or method2
     const method = Math.random() < 0.5 ? "method1" : "method2";
     const result = await makeJsonRpcRequest(method, params);
+    // Access the request.cfData property received from the server
+    const cfData = result.cfData;
     // Update the result in the HTML div
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML += `
-          <p><strong>Method:</strong> ${method}</p>
-          <p><strong>Params:</strong> ${JSON.stringify(params)}</p>
-          <p><strong>Result:</strong> ${result}</p>
-          <hr>
-          `;
+      <p><strong>Method:</strong> ${method}</p>
+      <p><strong>Params:</strong> ${JSON.stringify(params)}</p>
+      <p><strong>Result:</strong> ${result.result}</p>
+      <p><strong>Country:</strong> ${cfData.country}</p>
+      <p><strong>City:</strong> ${cfData.city}</p>
+      <hr>
+    `;
     console.log("Method:", method);
     console.log("Params:", params);
-    console.log("Result:", result);
+    console.log("Result:", result.result);
   } catch (error) {
     console.error("Error:", error.message);
   }
