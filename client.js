@@ -38,31 +38,27 @@ async function runDemo() {
 
         // Generate random parameters
         const params = generateRandomParams();
+        console.log("params: ", params)
         // Randomly select method1 or method2
         const method = Math.random() < 0.5 ? "method1" : "method2";
+        console.log("method: ", method)
         const response = await makeJsonRpcRequest(method, params);
         console.log("makeJsonRpcRequest", response)
 
         if (response.ok) {
-            const result = await response.json();
             // Access the result and cfData properties from the response
-            const {
-                Newresult,
-                cfData
-            } = result;
+            const { result: rpcResult, cfData } = response;
             // Update the result in the HTML div
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML += `
       <p><strong>Method:</strong> ${method}</p>
       <p><strong>Params:</strong> ${JSON.stringify(params)}</p>
-      <p><strong>Result:</strong> ${Newresult.result}</p>
+      <p><strong>Result:</strong> ${rpcResult}</p>
       <p><strong>Country:</strong> ${cfData.country}</p>
       <p><strong>City:</strong> ${cfData.city}</p>
       <hr>
     `;
-            console.log("Method:", method);
-            console.log("Params:", params);
-            console.log("Result:", Newresult.result);
+            console.log("Result:", rpcResult);
         } else {
             console.error('Error:', response.status, response.statusText);
         }
