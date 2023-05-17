@@ -47,10 +47,8 @@ async function runDemo() {
         console.log("makeJsonRpcRequest", response)
 
         // Access the result and cfData properties from the response
-        const {
-            result: rpcResult,
-            cfData
-        } = response;
+        const rpcResult = response.result;
+        const cfData = response.cfData;
         // Update the result in the HTML div
         const resultDiv = document.getElementById("result");
         resultDiv.innerHTML += `
