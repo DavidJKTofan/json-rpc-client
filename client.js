@@ -46,13 +46,14 @@ async function runDemo() {
         const response = await makeJsonRpcRequest(method, params);
         console.log("makeJsonRpcRequest", response)
 
-        if (response.ok) {
-            // Access the result and cfData properties from the response
-            //const result = await response.json();
-            const { result: rpcResult, cfData } = response;
-            // Update the result in the HTML div
-            const resultDiv = document.getElementById("result");
-            resultDiv.innerHTML += `
+        // Access the result and cfData properties from the response
+        const {
+            result: rpcResult,
+            cfData
+        } = response;
+        // Update the result in the HTML div
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML += `
       <p><strong>Method:</strong> ${method}</p>
       <p><strong>Params:</strong> ${JSON.stringify(params)}</p>
       <p><strong>Result:</strong> ${rpcResult}</p>
@@ -60,10 +61,8 @@ async function runDemo() {
       <p><strong>City:</strong> ${cfData.city}</p>
       <hr>
     `;
-            console.log("Result:", rpcResult);
-        } else {
-            console.error('Error:', response.status, response.statusText);
-        }
+        console.log("Result:", rpcResult);
+
     } catch (error) {
         console.error("Error:", error.message);
     }
