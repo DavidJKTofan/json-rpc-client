@@ -23,8 +23,7 @@ async function makeJsonRpcRequest(method, params) {
     throw new Error(rpcResponse.error.message);
   }
 
-  return rpcResponse;
-  //return rpcResponse.result;
+  return rpcResponse.result;
 }
 
 // Client-side code (continued)
@@ -42,20 +41,20 @@ async function runDemo() {
     const result = await makeJsonRpcRequest(method, params);
     console.log("makeJsonRpcRequest: ", result)
     // Access the result and cfData properties from the response
-    const { result, cfData } = result;
+    const { Newresult, cfData } = result;
     // Update the result in the HTML div
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML += `
       <p><strong>Method:</strong> ${method}</p>
       <p><strong>Params:</strong> ${JSON.stringify(params)}</p>
-      <p><strong>Result:</strong> ${result.result}</p>
+      <p><strong>Result:</strong> ${Newresult.result}</p>
       <p><strong>Country:</strong> ${cfData.country}</p>
       <p><strong>City:</strong> ${cfData.city}</p>
       <hr>
     `;
     console.log("Method:", method);
     console.log("Params:", params);
-    console.log("Result:", result.result);
+    console.log("Result:", Newresult.result);
   } catch (error) {
     console.error("Error:", error.message);
   }
